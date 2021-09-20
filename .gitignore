@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Virtal environment
+bin/
+
+# Libraries
+include/
+
+# Local database
+sql_app.db
