@@ -1,6 +1,7 @@
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi_login import LoginManager
 from sqlalchemy.orm import Session
 
 from . import crud, models, schemas
@@ -8,8 +9,11 @@ from .database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 
+SECRET = 'your-secret-key'
+
 app = FastAPI()
 
+manager = LoginManager(SECRET, token_url='/auth/token')
 
 # Dependency
 def get_db():
@@ -33,7 +37,7 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = crud.get_users(db, skip=skip, limit=limit)
     return users
 
-
+@manager.user_loader()
 @app.get("/users/{user_id}", response_model=schemas.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
     db_user = crud.get_user(db, user_id=user_id)

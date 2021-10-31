@@ -9,7 +9,9 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
-    profile = 
+    profile_id = Column(
+        Integer, ForeignKey("profile.id"), nullable=False
+    )
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
     profile = relationship(
@@ -21,7 +23,7 @@ class Profile(Base):
     __tablename__ = "profile"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
+    name = Column(String(50), nullable=False, unique=True)
 
 # class Item(Base):
 #     __tablename__ = "items"
