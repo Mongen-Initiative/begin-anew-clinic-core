@@ -136,3 +136,4 @@ include/
 
 # Local database
 sql_app.db
+postgres-data
