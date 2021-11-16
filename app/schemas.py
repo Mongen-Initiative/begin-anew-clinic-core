@@ -44,3 +44,7 @@ class Token(BaseModel):
 
 class TokenPayload(BaseModel):
     sub: Optional[int] = None
+
+
+class Status(BaseModel):
+    message: str

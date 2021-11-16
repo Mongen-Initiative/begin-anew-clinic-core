@@ -30,6 +30,10 @@ def get_db():
     finally:
         db.close()
 
+@app.get("/status/", response_model=schemas.Status)
+def return_status():
+    
+    return {"message": "Delta Reporter up and running"}
 
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
