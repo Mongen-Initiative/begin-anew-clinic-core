@@ -15,7 +15,7 @@ services:
       - SERVER_HOST=https://${DOMAIN?Variable not set}
       # Allow explicit env var override for tests
       - SMTP_HOST=${SMTP_HOST}
-    command: sh start_service.sh
+    command: sh prestart.sh
     ports:
       - '3000:3000'
     restart: on-failure
@@ -26,7 +26,7 @@ services:
 
   db:
       image: postgres:12
-      container_name: begin_anew_dev
+      container_name: begin_anew_db_dev
       environment:
         - POSTGRES_USER=begin_anew
         - POSTGRES_PASSWORD=123123
